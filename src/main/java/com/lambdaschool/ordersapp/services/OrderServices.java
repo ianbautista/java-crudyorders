@@ -14,4 +14,6 @@ public interface OrderServices
 
     List<Order> findAllOrders();
 
+    void delete(long ordernum);
+
 }

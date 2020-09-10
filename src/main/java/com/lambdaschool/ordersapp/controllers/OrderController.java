@@ -72,4 +72,13 @@ public class OrderController
         return new ResponseEntity<>("No Body Data", HttpStatus.OK);
     }
 
+    // DELETE /orders/order/{ordername} - deletes the given order
+    // http://localhost:2019/orders/order/58
+    @DeleteMapping(value = "/order/{ordernum}")
+    public ResponseEntity<?> deleteOrderById(@PathVariable long ordernum)
+    {
+        orderServices.delete(ordernum);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

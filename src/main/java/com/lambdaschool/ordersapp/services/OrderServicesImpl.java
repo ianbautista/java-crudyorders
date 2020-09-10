@@ -79,4 +79,17 @@ public class OrderServicesImpl implements OrderServices
         ordersrepos.findAll().iterator().forEachRemaining(list::add);
        return list;
     }
+
+    @Transactional
+    @Override
+    public void delete(long ordernum)
+    {
+        if (ordersrepos.findById(ordernum).isPresent())
+        {
+            ordersrepos.deleteById(ordernum);
+        }else
+        {
+            throw new EntityNotFoundException("Order " + ordernum + " Not Found!");
+        }
+    }
 }

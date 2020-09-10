@@ -88,7 +88,7 @@ Expose the following endpoints
 
 * [x]  POST /orders/order - adds a new order to an existing customer
 * [x]  PUT /orders/order/{ordernum} - completely replaces the given order record
-* [ ]  DELETE /orders/order/{ordername} - deletes the given order
+* [x]  DELETE /orders/order/{ordername} - deletes the given order
 
 ### Stretch Goal
 
