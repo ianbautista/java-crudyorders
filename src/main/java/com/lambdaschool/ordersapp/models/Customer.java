@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "customers")
+@JsonIgnoreProperties(value = "hasOpeningAmount") // internal use only must be ignored
 public class Customer
 {
     @Id
@@ -22,10 +23,24 @@ public class Customer
     private String workingarea;
     private String custcountry;
     private String grade;
+
+    @Transient
+    public boolean hasOpeningAmount = false; // declaring variable hasOpeningAmount
     private double openingamt;
+
+    @Transient
+    public boolean hasReceiveAmount = false; // declaring variable hasReceiveAmount
     private double receiveamt;
+
+
+    @Transient
+    public boolean hasPaymentAmount = false; // declaring variable hasPaymentAmount
     private double paymentamt;
+
+    @Transient
+    public boolean hasOutstandingAmount = false; // declaring variable hasOutstandingAmount
     private double outstandingamt;
+
     private String phone;
 
     // foreign key relationship to Agent
@@ -113,15 +128,17 @@ public class Customer
         return openingamt;
     }
 
-    public void setOpeningamt(double openingamt) {
+    public void setOpeningamt(double openingamt)
+    {
+        hasOpeningAmount = true; // checker
         this.openingamt = openingamt;
     }
 
-    public double getReceiveamt() {
-        return receiveamt;
-    }
+    public double getReceiveamt() { return receiveamt; }
 
-    public void setReceiveamt(double receiveamt) {
+    public void setReceiveamt(double receiveamt)
+    {
+        hasReceiveAmount = true; // checker
         this.receiveamt = receiveamt;
     }
 
@@ -129,7 +146,9 @@ public class Customer
         return paymentamt;
     }
 
-    public void setPaymentamt(double paymentamt) {
+    public void setPaymentamt(double paymentamt)
+    {
+        hasPaymentAmount = true; // checker
         this.paymentamt = paymentamt;
     }
 
@@ -137,7 +156,9 @@ public class Customer
         return outstandingamt;
     }
 
-    public void setOutstandingamt(double outstandingamt) {
+    public void setOutstandingamt(double outstandingamt)
+    {
+        hasOutstandingAmount = true; // checker
         this.outstandingamt = outstandingamt;
     }
 

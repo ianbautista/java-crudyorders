@@ -119,4 +119,85 @@ public class CustomerServicesImpl implements CustomerServices
         List<OrderCount> orderCountList = custrepos.findOrderCount();
         return orderCountList;
     }
+
+    @Transactional
+    @Override
+    public Customer update(Customer customer, long custcode)
+    {
+        Customer updateCustomer = findByCustCode(custcode);
+
+        //single value fields
+        if (customer.getCustname() != null) // checker
+        {
+            updateCustomer.setCustname(customer.getCustname()); // setter when check is valid
+        }
+
+        if (customer.getCustcity() != null)
+        {
+            updateCustomer.setCustcity(customer.getCustcity());
+        }
+
+        if (customer.getWorkingarea() != null)
+        {
+            updateCustomer.setWorkingarea(customer.getWorkingarea());
+        }
+
+        if (customer.getCustcountry() != null)
+        {
+            updateCustomer.setCustcountry(customer.getCustcountry());
+        }
+
+        if (customer.getGrade() != null)
+        {
+            updateCustomer.setGrade(customer.getGrade());
+        }
+
+        if (customer.hasOpeningAmount)
+        {
+            updateCustomer.setOpeningamt(customer.getOpeningamt());
+        }
+
+        if (customer.hasReceiveAmount)
+        {
+            updateCustomer.setReceiveamt(customer.getReceiveamt());
+        }
+
+        if (customer.hasPaymentAmount)
+        {
+            updateCustomer.setPaymentamt(customer.getPaymentamt());
+        }
+
+        if (customer.hasOutstandingAmount)
+        {
+            updateCustomer.setOutstandingamt(customer.getOutstandingamt());
+        }
+
+        if (customer.getPhone() != null)
+        {
+            updateCustomer.setPhone(customer.getPhone());
+        }
+
+        // foreign key field
+        if (customer.getAgentcode() != null)
+        {
+            Agent newAgent = agentrepos.findById(customer.getAgentcode().getAgentcode()).orElseThrow(() -> new EntityNotFoundException("Agent " + customer.getAgentcode() + " NotFound!"));
+            updateCustomer.setAgentcode(newAgent);
+        }
+
+        // collections field
+        // private List<Order> orders = new ArrayList<>();
+        if (customer.getOrders().size() > 0)
+        {
+            updateCustomer.getOrders().clear();
+            for (Order o : customer.getOrders())
+            {
+                // (double ordamount, double advanceamount, String orderdescription)
+                Order newOrder = new Order(o.getOrdamount(), o.getAdvanceamount(), updateCustomer, o.getOrderdescription());
+                updateCustomer.getOrders().add(newOrder);
+            }
+        }
+
+        //primary
+        return custrepos.save(updateCustomer);
+    }
 }

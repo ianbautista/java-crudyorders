@@ -81,7 +81,18 @@ public class CustomerController
         updateCustomer.setCustcode(custcode);
         updateCustomer = customerServices.save(updateCustomer);
 
-        return new ResponseEntity<>(updateCustomer, HttpStatus.OK);
+        return new ResponseEntity<>("No Body Data", HttpStatus.OK);
     }
 
+    // PATCH /customers/customer/{custcode} - updates customers with the new data. Only the new data is to be sent from the frontend client.
+    // http://localhost:2019/customers/customer/19
+    @PatchMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+    public ResponseEntity<?> updatePartCustomerById(@PathVariable long custcode, @RequestBody Customer updateCustomer)
+    {
+        updateCustomer = customerServices.update(updateCustomer, custcode);
+
+        return new ResponseEntity<>("No Body Data", HttpStatus.OK);
+    }
+
+    // DELETE /customers/customer/{custcode} - Deletes the given customer including any associated orders
 }
