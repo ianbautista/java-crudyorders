@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lambdaschool</groupId>
-	<artifactId>getordersapp</artifactId>
+	<artifactId>crudyorders</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>getordersapp</name>
-	<description>Christian's Get Orders App</description>
+	<name>crudyorders</name>
+	<description>Christian's crudyorders App</description>
 
 	<properties>
 		<java.version>14</java.version>
