@@ -93,7 +93,7 @@ Expose the following endpoints
 ### Stretch Goal
 
 * [x] Rename your project and associated packages and files from orders, or what you called your orders, to crudyorders, or what you would like to call your crudyorders project.
-* [ ] DELETE /agents/unassigned/{agentcode} - Deletes an agent if they are not assigned to a customer
+* [x] DELETE /agents/unassigned/{agentcode} - Deletes an agent if they are not assigned to a customer
 
 ### MVP Testing
 
