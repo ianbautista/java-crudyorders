@@ -86,7 +86,7 @@ Expose the following endpoints
 * [x]  PATCH /customers/customer/{custcode} - updates customers with the new data. Only the new data is to be sent from the frontend client.
 * [x]  DELETE /customers/customer/{custcode} - Deletes the given customer including any associated orders
 
-* [ ]  POST /orders/order - adds a new order to an existing customer
+* [x]  POST /orders/order - adds a new order to an existing customer
 * [ ]  PUT /orders/order/{ordernum} - completely replaces the given order record
 * [ ]  DELETE /orders/order/{ordername} - deletes the given order
 

@@ -66,7 +66,7 @@ public class CustomerServicesImpl implements CustomerServices
         newCustomer.setPhone(customer.getPhone());
 
         // foreign key field
-        Agent newAgent = agentrepos.findById(customer.getAgentcode().getAgentcode()).orElseThrow(() -> new EntityNotFoundException("Agent " + customer.getAgentcode() + " NotFound!"));
+        Agent newAgent = agentrepos.findById(customer.getAgentcode().getAgentcode()).orElseThrow(() -> new EntityNotFoundException("Agent " + customer.getAgentcode().getAgentcode() + " NotFound!"));
         newCustomer.setAgentcode(newAgent);
 
         // collections field

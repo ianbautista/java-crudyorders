@@ -67,7 +67,8 @@ public class CustomerController
 
         // Response Headers -> Location Header = URL to the new restaurant
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newCustomerURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{custcode").buildAndExpand(newCustomer.getCustcode()).toUri();
+        URI newCustomerURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{custcode}").buildAndExpand(newCustomer.getCustcode()).toUri();
+        responseHeaders.setLocation((newCustomerURI));
         return new ResponseEntity<>("No Body Data", responseHeaders, HttpStatus.CREATED);
 
     }
