@@ -3,7 +3,6 @@ package com.lambdaschool.ordersapp.services;
 import com.lambdaschool.ordersapp.models.Agent;
 import com.lambdaschool.ordersapp.models.Customer;
 import com.lambdaschool.ordersapp.models.Order;
-import com.lambdaschool.ordersapp.models.Payment;
 import com.lambdaschool.ordersapp.repositories.AgentsRepository;
 import com.lambdaschool.ordersapp.repositories.CustomersRepository;
 import com.lambdaschool.ordersapp.repositories.OrdersRepository;
@@ -66,10 +65,11 @@ public class CustomerServicesImpl implements CustomerServices
         newCustomer.setOutstandingamt(customer.getOutstandingamt());
         newCustomer.setPhone(customer.getPhone());
 
+        // foreign key field
         Agent newAgent = agentrepos.findById(customer.getAgentcode().getAgentcode()).orElseThrow(() -> new EntityNotFoundException("Agent " + customer.getAgentcode() + " NotFound!"));
         newCustomer.setAgentcode(newAgent);
 
-        // collections
+        // collections field
         // private List<Order> orders = new ArrayList<>();
         newCustomer.getOrders().clear();
         for (Order o : customer.getOrders())

@@ -72,4 +72,16 @@ public class CustomerController
 
     }
 
+    // PUT /customers/customer/{custcode} - completely replaces the customer record including associated orders with the provided data
+    // http://localhost:2019/customers/customer/{custcode}
+    // PUT http://localhost:2019/customers/customer/19
+    @PutMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+    public ResponseEntity<?> updateFullCustomerById(@PathVariable long custcode, @Valid @RequestBody Customer updateCustomer)
+    {
+        updateCustomer.setCustcode(custcode);
+        updateCustomer = customerServices.save(updateCustomer);
+
+        return new ResponseEntity<>(updateCustomer, HttpStatus.OK);
+    }
+
 }
