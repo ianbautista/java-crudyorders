@@ -11,4 +11,7 @@ public interface OrderServices
     Order findOrderByOrdnum(long ordnum);
 
     List<Order> getByAdvanceamount(double amount);
+
+    List<Order> findAllOrders();
+
 }

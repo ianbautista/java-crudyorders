@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -69,5 +70,13 @@ public class OrderServicesImpl implements OrderServices
     {
 
         return ordersrepos.findByAdvanceamountGreaterThan(0);
+    }
+
+    @Override
+    public List<Order> findAllOrders()
+    {
+        List<Order> list = new ArrayList<>();
+        ordersrepos.findAll().iterator().forEachRemaining(list::add);
+       return list;
     }
 }

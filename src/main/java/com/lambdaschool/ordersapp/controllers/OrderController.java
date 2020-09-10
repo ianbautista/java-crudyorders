@@ -21,6 +21,14 @@ public class OrderController
     @Autowired
     OrderServices orderServices;
 
+    // http://localhost:2019/orders/all
+    @GetMapping(value = "/all", produces = {"application/json"})
+    public ResponseEntity<?> getAllOrdersList()
+    {
+        List<Order> orderList = orderServices.findAllOrders();
+        return new ResponseEntity<>(orderList, HttpStatus.OK);
+    }
+
     // http://localhost:2019/orders/order/7
     @GetMapping(value = "/order/{ordnum}", produces = {"application/json"})
     public ResponseEntity<?> findOrderByOrdnum(@PathVariable long ordnum)
@@ -51,6 +59,17 @@ public class OrderController
         URI newOrderURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{ordnum}").buildAndExpand(newOrder.getOrdnum()).toUri();
         responseHeaders.setLocation((newOrderURI));
         return new ResponseEntity<>("No Body Data", responseHeaders, HttpStatus.CREATED);
+    }
+
+    // PUT /orders/order/{ordernum} - completely replaces the given order record
+    // http://localhost:2019/orders/order/63
+    @PutMapping(value = "/order/{ordernum}", consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<?> updateFullOrder(@PathVariable long ordernum, @Valid @RequestBody Order updateOrder)
+    {
+        updateOrder.setOrdnum(ordernum);
+        updateOrder = orderServices.save(updateOrder);
+
+        return new ResponseEntity<>("No Body Data", HttpStatus.OK);
     }
 
 }
