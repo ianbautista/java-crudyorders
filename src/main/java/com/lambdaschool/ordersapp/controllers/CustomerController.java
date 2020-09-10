@@ -75,7 +75,7 @@ public class CustomerController
     // PUT /customers/customer/{custcode} - completely replaces the customer record including associated orders with the provided data
     // http://localhost:2019/customers/customer/{custcode}
     // PUT http://localhost:2019/customers/customer/19
-    @PutMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+    @PutMapping(value = "/customer/{custcode}", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> updateFullCustomerById(@PathVariable long custcode, @Valid @RequestBody Customer updateCustomer)
     {
         updateCustomer.setCustcode(custcode);
@@ -86,7 +86,7 @@ public class CustomerController
 
     // PATCH /customers/customer/{custcode} - updates customers with the new data. Only the new data is to be sent from the frontend client.
     // http://localhost:2019/customers/customer/19
-    @PatchMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+    @PatchMapping(value = "/customer/{custcode}", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> updatePartCustomerById(@PathVariable long custcode, @RequestBody Customer updateCustomer)
     {
         updateCustomer = customerServices.update(updateCustomer, custcode);
@@ -95,4 +95,11 @@ public class CustomerController
     }
 
     // DELETE /customers/customer/{custcode} - Deletes the given customer including any associated orders
+    // http://localhost:2019/customers/customer/54
+    @DeleteMapping(value = "/customer/{custcode}")
+    public ResponseEntity<?> deleteCustomerById(@PathVariable long custcode)
+    {
+        customerServices.delete(custcode);
+        return new ResponseEntity<>("No Body Data", HttpStatus.OK);
+    }
 }
